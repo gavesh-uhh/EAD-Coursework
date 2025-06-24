@@ -1,0 +1,181 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="Invoice" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQL"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#EEEFF0">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle backcolor="#D8D8D8">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<query language="sql"><![CDATA[]]></query>
+	</dataset>
+	<query language="SQL"><![CDATA[SELECT
+    s.full_name AS StudentName,
+    sub.subject_name AS Subject,
+    m.exam_type AS ExamType,
+    m.marks_obtained AS MarksObtained,
+    m.max_marks AS MaxMarks,
+    m.exam_date AS ExamDate
+FROM
+    students s
+JOIN
+    marks m ON s.student_id = m.student_id
+JOIN
+    subjects sub ON m.subject_id = sub.subject_id
+ORDER BY
+    s.full_name, sub.subject_name, m.exam_date]]></query>
+	<field name="StudentName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="full_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="StudentName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="students"/>
+	</field>
+	<field name="Subject" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="subject_name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Subject"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="subjects"/>
+	</field>
+	<field name="ExamType" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="exam_type"/>
+		<property name="com.jaspersoft.studio.field.label" value="ExamType"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="marks"/>
+	</field>
+	<field name="MarksObtained" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="marks_obtained"/>
+		<property name="com.jaspersoft.studio.field.label" value="MarksObtained"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="marks"/>
+	</field>
+	<field name="MaxMarks" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="max_marks"/>
+		<property name="com.jaspersoft.studio.field.label" value="MaxMarks"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="marks"/>
+	</field>
+	<field name="ExamDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="exam_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="ExamDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="marks"/>
+	</field>
+	<title height="110" splitType="Stretch">
+		<element kind="staticText" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8" x="20" y="52" width="30" height="20" hTextAlign="Left">
+			<text><![CDATA[Date:]]></text>
+			<box rightPadding="4"/>
+		</element>
+		<element kind="textField" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979" x="50" y="52" width="84" height="20" pattern="EEEEE dd MMMMM yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="staticText" uuid="e622555d-198b-4ccd-a4a1-c59c53304058" x="20" y="27" width="260" height="25" fontSize="19.0" bold="true">
+			<text><![CDATA[Student Performance Report]]></text>
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+		<element kind="line" uuid="06cc8810-791c-4123-84b2-587bab8c63a1" x="-1" y="100" width="557" height="1"/>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</title>
+	<columnHeader height="20">
+		<element kind="staticText" uuid="41e3dd2e-fd9c-49fa-8df0-dfa0e9004a53" positionType="Float" x="3" y="0" width="146" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[Student's Name]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ced80-f300-4b7c-976c-91576d5f88d5"/>
+		</element>
+		<element kind="staticText" uuid="34ed4e68-e775-4e57-8e18-71f5cca6509b" positionType="Float" x="150" y="0" width="110" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[Subject]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a60aa005-d5ea-4f53-b079-d1bb33a80821"/>
+		</element>
+		<element kind="staticText" uuid="14aa7ffe-465c-4bc7-8d40-02672d8dde0d" positionType="Float" x="260" y="0" width="92" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[Exam Type]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9e322b2-e823-4660-a910-005ade344a40"/>
+		</element>
+		<element kind="staticText" uuid="966e6ab7-abb6-4180-be97-6f9446ba3b26" positionType="Float" x="360" y="0" width="70" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[Marks]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3e2bcabc-c73f-4d4d-9ce1-646229846db9"/>
+		</element>
+		<element kind="staticText" uuid="40d7145a-d9ae-4385-9926-f902b61a636e" positionType="Float" x="430" y="0" width="122" height="20" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+			<text><![CDATA[Date]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8237104-c5a9-49b7-ab87-3f47cca97c16"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<element kind="textField" uuid="11e1f586-9d86-4379-8438-31487c6d47f1" positionType="Float" x="3" y="0" width="146" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{StudentName}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="906ced80-f300-4b7c-976c-91576d5f88d5"/>
+			</element>
+			<element kind="textField" uuid="cae00114-27b9-4c8e-a399-16f251e21860" positionType="Float" x="150" y="0" width="110" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{Subject}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a60aa005-d5ea-4f53-b079-d1bb33a80821"/>
+			</element>
+			<element kind="textField" uuid="ce9632d7-c016-4b8e-a8c0-eb9b37ea7117" positionType="Float" x="260" y="0" width="92" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{ExamType}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d9e322b2-e823-4660-a910-005ade344a40"/>
+			</element>
+			<element kind="textField" uuid="4b541373-9092-493a-b0df-ef91ed8cdd9b" positionType="Float" x="360" y="0" width="70" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{MarksObtained}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3e2bcabc-c73f-4d4d-9ce1-646229846db9"/>
+			</element>
+			<element kind="textField" uuid="78661107-16b9-4573-b35a-9a0db64922dc" positionType="Float" x="430" y="0" width="122" height="20" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+				<expression><![CDATA[$F{ExamDate}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8237104-c5a9-49b7-ab87-3f47cca97c16"/>
+			</element>
+		</band>
+	</detail>
+	<lastPageFooter height="177">
+		<element kind="staticText" uuid="1a0d7088-5af7-4865-8be1-41ec5f51fb36" positionType="Float" x="-1" y="30" width="261" height="101">
+			<text><![CDATA[Verified By :-]]></text>
+			<box>
+				<topPen lineWidth="1.1" lineStyle="Dashed"/>
+				<leftPen lineWidth="1.1" lineStyle="Dashed"/>
+				<bottomPen lineWidth="1.1" lineStyle="Dashed"/>
+				<rightPen lineWidth="1.1" lineStyle="Dashed"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f" positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" fontName="Cascadia Code" fontSize="9.0" italic="true" bold="false" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Generated By Student Reporting Software]]></text>
+		</element>
+		<element kind="line" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246" x="1110" y="-76" width="556" height="1">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+	</lastPageFooter>
+</jasperReport>
